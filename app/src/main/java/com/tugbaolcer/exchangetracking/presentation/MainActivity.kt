@@ -1,4 +1,4 @@
-package com.tugbaolcer.exchangetracking
+package com.tugbaolcer.exchangetracking.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,8 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.tugbaolcer.exchangetracking.ui.theme.ExchangeTrackingTheme
+import com.tugbaolcer.exchangetracking.presentation.binanceticker.BinanceTickerScreen
+import com.tugbaolcer.exchangetracking.presentation.ui.theme.ExchangeTrackingTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,8 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ExchangeTrackingTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    BinanceTickerScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

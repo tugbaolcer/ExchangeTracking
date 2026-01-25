@@ -1,4 +1,4 @@
-package com.tugbaolcer.exchangetracking.ui.theme
+package com.tugbaolcer.exchangetracking.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

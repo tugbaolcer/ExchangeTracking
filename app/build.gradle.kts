@@ -3,8 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kapt)
-    kotlin("plugin.serialization") version "2.1.0"
 }
 
 android {
@@ -45,6 +45,10 @@ android {
     buildFeatures {
         compose = true
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -56,6 +60,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.work.runtime)
 
     // Ktor & Network
     implementation(libs.ktor.client.core)
@@ -70,6 +75,10 @@ dependencies {
     //Dagger/Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.hilt.work)
+    kapt(libs.androidx.hilt.compiler)
 
     // Lifecycle & Coroutines
     implementation(libs.lifecycle.runtime.compose)
