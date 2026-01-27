@@ -41,17 +41,17 @@ fun BinanceTickerScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
-    UIStateContent(state = state) { tickerList ->
+    UIStateContent(state = state) { tickerMap ->
         LazyColumn(
             modifier = modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(
-                items = tickerList,
+                items = tickerMap.values.toList(),
                 key = { it.symbol }
             ) { ticker ->
-                PriceCard(ticker = ticker)
+                PriceCard(ticker)
             }
         }
     }
@@ -59,7 +59,6 @@ fun BinanceTickerScreen(
 
 @Composable
 fun PriceCard(ticker: PriceTicker) {
-    // Önceki fiyatı hatırlamak için remember kullanılır
     var lastPrice by remember { mutableDoubleStateOf(ticker.price) }
 
     val backgroundColor by animateColorAsState(
@@ -68,11 +67,10 @@ fun PriceCard(ticker: PriceTicker) {
             ticker.price < lastPrice -> Color.Red.copy(alpha = 0.2f)
             else -> Color.Transparent
         },
-        animationSpec = tween(durationMillis = 300), // Akıcılık için süre eklendi
+        animationSpec = tween(durationMillis = 300),
         label = "PriceAnim"
     )
 
-    // Fiyat her değiştiğinde 500ms sonra lastPrice güncellenir
     LaunchedEffect(ticker.price) {
         delay(500)
         lastPrice = ticker.price
@@ -80,7 +78,7 @@ fun PriceCard(ticker: PriceTicker) {
 
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp), // Modern görünüm
+        shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1E1E))
     ) {
         Row(
@@ -99,7 +97,7 @@ fun PriceCard(ticker: PriceTicker) {
             )
 
             Text(
-                text = String.format("%.2f", ticker.price), // Fiyatı formatlı gösterelim
+                text = String.format("%.2f", ticker.price),
                 color = if (ticker.price >= lastPrice) Color.Green else Color.Red,
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.ExtraBold
