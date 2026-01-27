@@ -4,6 +4,13 @@
 
 ---
 
+
+📸 Screenshots
+
+
+
+[Screen_recording_20260127_152818.webm](https://github.com/user-attachments/assets/017bcbc9-0932-4159-87f2-a101d3d27bcc)
+
 ## 🚀 Features
 - **Real-time Updates:** Live tracking of exchange rates using **WebSocket** integration.
 - **Data Source:** Powered by **Binance Futures WebSocket** (`wss://fstream.binance.com`).
@@ -43,9 +50,6 @@ app/
 └── di/             # Hilt Modules (Dependency Injection)
 ```
 
-📸 Screenshots
-//To be added.
-
 🤝 Contributing
 1. Fork the project.
 
@@ -61,5 +65,6 @@ app/
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 Developer: Tuğba Ölçer
+
 
 
