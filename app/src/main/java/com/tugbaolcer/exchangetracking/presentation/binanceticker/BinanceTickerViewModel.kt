@@ -2,6 +2,7 @@ package com.tugbaolcer.exchangetracking.presentation.binanceticker
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tugbaolcer.exchangetracking.core.websocket.SocketResource
 import com.tugbaolcer.exchangetracking.domain.model.PriceTicker
 import com.tugbaolcer.exchangetracking.domain.usecase.GetAllMarkPricesUseCase
 import com.tugbaolcer.exchangetracking.presentation.components.UIState
@@ -17,16 +18,24 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BinanceTickerViewModel @Inject constructor(
-    getAllMarkPricesUseCase: GetAllMarkPricesUseCase
+    private val getAllMarkPricesUseCase: GetAllMarkPricesUseCase
 ) : ViewModel() {
 
     val uiState: StateFlow<UIState<Map<String, PriceTicker>>> =
         getAllMarkPricesUseCase()
-            .scan(emptyMap<String, PriceTicker>()) { acc, list ->
-                acc + list.associateBy { it.symbol }
+            .scan(emptyMap<String, PriceTicker>()) { acc, resource ->
+                when (resource) {
+                    is SocketResource.Connected -> {
+                        acc + resource.data.associateBy { it.symbol }
+                    }
+                    is SocketResource.Error -> {
+                        acc
+                    }
+                    is SocketResource.Connecting -> acc
+                }
             }
             .map { map ->
-                if (map.isEmpty()) UIState.Empty
+                if (map.isEmpty()) UIState.Loading
                 else UIState.Success(map)
             }
             .onStart { emit(UIState.Loading) }

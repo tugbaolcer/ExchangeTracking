@@ -1,4 +1,4 @@
-package com.tugbaolcer.exchangetracking.di
+package com.tugbaolcer.exchangetracking.core.network
 
 import android.util.Log
 import io.ktor.client.*
@@ -16,6 +16,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.io.IOException
 import kotlin.time.Duration.Companion.milliseconds
 
 sealed class NetworkException : Exception() {
@@ -34,6 +35,7 @@ object NetworkModule {
         isLenient = true
         explicitNulls = false
         encodeDefaults = false
+        prettyPrint = true // Loglarda JSON'un düzgün görünmesini sağlar
     }
 
     @Provides
@@ -71,7 +73,7 @@ object NetworkModule {
                 response.status.value in 500..599
             }
             retryOnExceptionIf { _, cause ->
-                cause is java.io.IOException
+                cause is IOException
             }
             exponentialDelay()
         }

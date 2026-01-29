@@ -1,4 +1,4 @@
-package com.tugbaolcer.exchangetracking.di
+package com.tugbaolcer.exchangetracking.core.network
 
 import com.tugbaolcer.exchangetracking.data.repository.BinanceRepositoryImpl
 import com.tugbaolcer.exchangetracking.domain.repository.BinanceRepository

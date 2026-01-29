@@ -1,4 +1,4 @@
-package com.tugbaolcer.exchangetracking.data.dto
+package com.tugbaolcer.exchangetracking.data.remote.dto
 
 import com.tugbaolcer.exchangetracking.domain.model.PriceTicker
 import kotlinx.serialization.SerialName

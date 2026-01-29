@@ -1,4 +1,4 @@
-package com.tugbaolcer.exchangetracking.di
+package com.tugbaolcer.exchangetracking.core.network
 
 object NetworkConfig {
     const val BASE_URL = "wss://fstream.binance.com"
