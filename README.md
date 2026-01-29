@@ -2,6 +2,9 @@
 
 **ExchangeTracking** is a modern Android application designed to track real-time currency exchange rates and financial data. The project is built with a focus on scalability, maintainability, and performance using **Clean Architecture** principles.
 
+
+IMPORTANT NOTE: the architecture is not fully finalized yet.
+
 ---
 
 
@@ -65,6 +68,7 @@ app/
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 Developer: Tuğba Ölçer
+
 
 
 
